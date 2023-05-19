@@ -3,3 +3,13 @@
 @tailwind utilities;
 @import url('https://fonts.cdnfonts.com/css/sansation');
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+    width: 15px;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 15px;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
