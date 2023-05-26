@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { CirclePicker } from 'react-color';
 import TripItem from './Components/TripItem';
+import tf from './Components/tf.png';
 
 function App() {
+  let t = tf;
   const [tripsList, setTripsList] = useState([]);
   const [trip, setTrip] = useState({ID: tripsList.length, From: '', To: '', dateStart: '', dateEnd: '', Color: '#3f51b5', Pass: 0});
+  const [opac, setOpac] = useState('none');
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -29,24 +32,29 @@ function App() {
 
 
   return (
-    <div className='flex justify-center w-[100vw] h-[100vh] bg-[#555661] border-2 border-blue-500'>
-      <div className='flex justify-center items-center ml-24 w-[90%] border-2 border-red-500'>
+    <div className='flex justify-center w-[100vw] h-[100vh] bg-gray-800 bg-opacity-90'>
+      <div className='flex justify-center items-center ml-24 w-[90%]'>
 
           {/* Main window displaying data contained in trips objects */}
           
-          <div className='flex justify-center items-center border-2 border-green-500 w-[100%]'>
+          <div className='flex justify-center items-start h-[80%] w-[100%]'>
             {tripsDisplay}
           </div>
         
 
           {/* Menu for creating trips objects */}
 
-          <form id='createMenu' className='absolute bottom-2 flex h-[250px] bg-[#252222] pr-4 bg-opacity-70 mb-4 mt-4 rounded-md overflow-hidden'>
+          <form id='createMenu' className='absolute bottom-1 flex scale-[0.7] h-[230px] bg-[#252222] pr-4 bg-opacity-70 mt-4 rounded-md overflow-hidden'>
               <CirclePicker className='overflow-hidden bg-[#252222] bg-opacity-70 pt-2 pl-6' color={trip.Color} 
                 onChange={(color) => {
                   setTrip({...trip, Color: color.hex});
                 }}
               />
+
+              <div className='absolute z-10 bg-gray-800 w-[100%] h-[100%]' style={{display: opac}}>
+                <img className='ml-12 mt-6'></img>  
+              </div>  
+              <button className='absolute top-1 right-2 z-20 text-white transition-all font-bold' type='button' onClick={() => setOpac(opac === 'none' ? 'block' : 'none')} >X</button>
               <div style={{backgroundColor: trip.Color}} className='w-[40px] border-r-[1px] border-gray-700 transition-colors'></div>
 
               <div className='relative flex flex-col text-white justify-center items-center w-[180px] h-[180px] bg-[#252222] my-5 mt-8 mr-2 ml-10 rounded-md'>
